@@ -1,7 +1,182 @@
-echo "# Inicio.Vistas" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git branch -M main
-git remote add origin https://github.com/FacturPDR/Inicio.Vistas.git
-git push -u origin main
+package Inicio.Vistas;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import javax.swing.BoxLayout;
+import java.awt.Font;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.SystemColor;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Inicio {
+
+	private JFrame frame;
+	private JTextField JbaelInicio;
+	private JTextField txtClientes;
+	private JTextField txtVehiculos;
+
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Inicio window = new Inicio();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	public Inicio() {
+		initialize();
+	}
+
+	private void initialize() {
+		frame = new JFrame();
+		frame.setBounds(200, 200, 1108, 500);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// PANEL LATERAL: crea un JPanel y lo establece como el componente del lado izquierdo del BorderLayout del frame.
+		JPanel panelLateral = new JPanel();
+		panelLateral.setBackground(Color.WHITE); // establece el color de fondo del panel en blanco
+		panelLateral.setPreferredSize(new Dimension(290, 500)); // establece las dimensiones preferidas del panel
+		frame.getContentPane().add(panelLateral, BorderLayout.WEST); // agrega el panel al contenedor del frame en la posición oeste (izquierda)
+		panelLateral.setLayout(null); // establece un layout nulo para que los componentes dentro del panel puedan ser colocados manualmente
+
+		// CABECERO: crea un JPanel y lo establece como el componente del norte (arriba) del BorderLayout del frame.
+		JPanel cabecero = new JPanel();
+		cabecero.setBackground(new Color(33, 37, 41)); // establece el color de fondo del panel en un tono gris oscuro
+		cabecero.setPreferredSize(new Dimension(100, 50)); // establece las dimensiones preferidas del panel
+		frame.getContentPane().add(cabecero, BorderLayout.NORTH);
+		cabecero.setLayout(null);// establece un layout nulo para que los componentes dentro del panel puedan ser colocados manualmente
+
+		// CONTENIDO PRINCIPAL: crea un JPanel y lo establece como el componente central del BorderLayout del frame.
+		JPanel contenido = new JPanel();
+		contenido.setBackground(Color.WHITE); // establece el color de fondo del panel en blanco
+		contenido.setPreferredSize(new Dimension(800, 400)); // establece las dimensiones preferidas del panel
+		frame.getContentPane().add(contenido, BorderLayout.CENTER);
+		contenido.setLayout(null);// establece un layout nulo para que los componentes dentro del panel puedan ser colocados manualmente
+
+		
+		
+		// "Inicio" , EN BARRA LATERAL..
+
+		JButton ButtonInicio = new JButton("Inicio");  // Crea un botón con el texto "Inicio"
+		ButtonInicio.setForeground(new Color(128, 128, 128));
+		ButtonInicio.setFont(new Font("Constantia", Font.PLAIN, 19));  // Establece la fuente del botón
+		ButtonInicio.setBackground(new Color(240, 240, 240));  // Establece el color de fondo del botón
+		ButtonInicio.setBounds(-52, -18, 178, 126);  // Establece la posición y tamaño del botón en el panel lateral
+		ButtonInicio.setBorder(null);  // Oculta el borde del botón
+		ButtonInicio.setOpaque(false);  // Establece el fondo del botón como transparente
+		panelLateral.add(ButtonInicio);  // Agrega el botón al panel lateral
+
+		//TEXTO CLEINTES
+
+		txtClientes = new JTextField();  // Crea un campo de texto
+		txtClientes.setForeground(new Color(192, 192, 192));  // Establece el color del texto
+		txtClientes.setFont(new Font("Constantia", Font.PLAIN, 18));  // Establece la fuente del texto
+		txtClientes.setText("Clientes\r\n");  // Establece el texto del campo de texto
+		txtClientes.setBorder(null);  // Oculta el borde del campo de texto
+		txtClientes.setOpaque(false);  // Establece el fondo del campo de texto como transparente
+		txtClientes.setBounds(10, 71, 88, 19);  // Establece la posición y tamaño del campo de texto en el panel lateral
+		panelLateral.add(txtClientes);  // Agrega el campo de texto al panel lateral
+		txtClientes.setColumns(10);  // Establece el ancho del campo de texto
+
+		// BOTON CLIENTES
+
+		JButton btnListadoDeClientes = new JButton("Listado de clientes");  // Crea un botón con el texto "Listado de clientes"
+		btnListadoDeClientes.setOpaque(false);  // Establece el fondo del botón como transparente
+		btnListadoDeClientes.setFont(new Font("Constantia", Font.PLAIN, 14));  // Establece la fuente del botón
+		btnListadoDeClientes.setBorder(null);  // Oculta el borde del botón
+		btnListadoDeClientes.setBackground(SystemColor.menu);  // Establece el color de fondo del botón
+		btnListadoDeClientes.setBounds(20, 88, 127, 28);  // Establece la posición y tamaño del botón en el panel lateral
+		panelLateral.add(btnListadoDeClientes);  // Agrega el botón al panel lateral
+
+		// TEXTO VEHICULOS
+		// Creación de un campo de texto JTextField con el nombre "txtVehiculos"
+		txtVehiculos = new JTextField();
+		// Se establece el texto "Vehiculos" dentro del campo de texto
+		txtVehiculos.setText("Vehiculos");
+		// Se establece la opacidad del campo de texto como falso
+		txtVehiculos.setOpaque(false);
+		// Se establece el color de texto del campo de texto como GRIS CLARO
+		txtVehiculos.setForeground(Color.LIGHT_GRAY);
+		// Se establece la fuente del texto como "Constantia" con tamaño 18
+		txtVehiculos.setFont(new Font("Constantia", Font.PLAIN, 18));
+		// Se establece el número de columnas en el campo de texto como 10
+		txtVehiculos.setColumns(10);
+		// Se establece el borde del campo de texto como nulo
+		txtVehiculos.setBorder(null);
+		// Se establecen las coordenadas y el tamaño del campo de texto dentro del panel lateral
+		txtVehiculos.setBounds(10, 126, 88, 19);
+		// Se agrega el campo de texto al panel lateral
+
+		panelLateral.add(txtVehiculos);
+		
+		//BOTON DE VEHICULOS
+		
+		// Creación de un botón JButton con el nombre "btnListadoDeVehiculos"
+		JButton btnListadoDeVehiculos = new JButton("Listado de vehiculos");
+		// Se establece la opacidad del botón como falso
+		btnListadoDeVehiculos.setOpaque(false);
+		// Se establece la fuente del botón como "Arial" con tamaño 14
+		btnListadoDeVehiculos.setFont(new Font("Arial", Font.PLAIN, 14));
+		// Se establece el borde del botón como nulo
+		btnListadoDeVehiculos.setBorder(null);
+		// Se establece el fondo del botón como el color de menú del sistema
+		btnListadoDeVehiculos.setBackground(SystemColor.menu);
+		// Se establecen las coordenadas y el tamaño del botón dentro del panel lateral
+		btnListadoDeVehiculos.setBounds(20, 147, 150, 28);
+		// Se agrega el botón al panel lateral
+		panelLateral.add(btnListadoDeVehiculos);
+		
+		
+		//BOTON DE AMINISTRACION
+		// Creación de un botón JButton con el nombre "btnAdministracion"
+		JButton btnAdministracin = new JButton("Administración");
+		// Se establece la opacidad del botón como falso(TRASPARENTE)
+		btnAdministracin.setOpaque(false);
+		// Se establece el color de texto del botón como GRIS
+		btnAdministracin.setForeground(Color.GRAY);
+		// Se establece la fuente del botón como "Arial" con tamaño 14
+		btnAdministracin.setFont(new Font("Arial", Font.PLAIN, 14));
+		// Se establece el borde del botón como nulo , SIN BORDADO
+		btnAdministracin.setBorder(null);
+		// Se establece el fondo del botón como el color de menú del sistema
+		btnAdministracin.setBackground(SystemColor.menu);
+		// Se establecen las coordenadas y el tamaño del botón dentro del panel lateral
+		btnAdministracin.setBounds(0, 355, 111, 28);
+		// Se agrega el botón al panel lateral
+		panelLateral.add(btnAdministracin);
+		
+		//BOTON DE CONFIGURACION
+		
+		JButton btnConfiguracin = new JButton("Configuración");
+		// Se establece la opacidad del botón como falso(TRANSPARENTE)
+		btnConfiguracin.setOpaque(false);
+		// Se establece el color de texto del botón como GRIS
+		btnConfiguracin.setForeground(Color.GRAY);
+		// Se establece la fuente del botón como "Arial" con tamaño 14
+		btnConfiguracin.setFont(new Font("Arial", Font.PLAIN, 14));
+		// Se establece el borde del botón como nulo , SIN BORDADO.
+		btnConfiguracin.setBorder(null);
+		// Se establece el fondo del botón como el color de menú del sistema
+		btnConfiguracin.setBackground(SystemColor.menu);
+		// Se establecen las coordenadas y el tamaño del botón dentro del panel lateral
+		btnConfiguracin.setBounds(0, 375, 111, 28);
+		// Se agrega el botón al panel lateral
+		panelLateral.add(btnConfiguracin);
+
+	}
+}
+
+
