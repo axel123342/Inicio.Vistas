@@ -1,28 +1,31 @@
 package Inicio.Vistas;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+import java.awt.Window.Type;
+
 
 public class Inicio {
 
 	private JFrame frame;
-	private JTextField JbaelInicio;
 	private JTextField txtClientes;
 	private JTextField txtVehiculos;
-
+	private JPanel panelRecuadro_1;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -39,9 +42,12 @@ public class Inicio {
 	public Inicio() {
 		initialize();
 	}
-
+	
+	
 	private void initialize() {
 		frame = new JFrame();
+		frame.setResizable(false);
+		frame.setType(Type.UTILITY);
 		frame.setBounds(200, 200, 1108, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -66,21 +72,48 @@ public class Inicio {
 		frame.getContentPane().add(contenido, BorderLayout.CENTER);
 		contenido.setLayout(null);// establece un layout nulo para que los componentes dentro del panel puedan ser colocados manualmente
 
+		//*****************************CABECERO*************************************************+++
+		//***************************************************************************************
 		
+		// "FACTUR PDR" y establece sus estilos
+		JLabel labelCabecero = new JLabel("FACTUR PDR");
+		labelCabecero.setForeground(Color.orange); // Establece el color de texto a blanco
+		labelCabecero.setFont(new Font("Montserrat", Font.BOLD, 25)); // Establece la fuente y tamaño de texto
+		labelCabecero.setBounds(10, 5, 200, 40); // Establece la posición y tamaño del JLabel dentro del panel cabecero
+		cabecero.add(labelCabecero); // Agrega el JLabel al panel cabecero
 		
-		// "Inicio" , EN BARRA LATERAL..
+		// Agrega un listener de mouse al JLabel "labelCabecero"
+		labelCabecero.addMouseListener(new MouseAdapter() {
+		// Sobrescribe el método mouseClicked del adapter
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			// Si el color de primer plano actual del JLabel es naranja
+			if (labelCabecero.getForeground() == Color.orange) {
+			// Cambia el color de primer plano a verde
+				labelCabecero.setForeground(Color.green);
+			} else {
+				// De lo contrario, cambia el color de primer plano a naranja
+				labelCabecero.setForeground(Color.orange);
+				}
+			}
+		});
+		
+		//*******************************BARRA LATERAL IZQUIERDA*********************************
+		//***************************************************************************************
 
+		//INICIO
+		
 		JButton ButtonInicio = new JButton("Inicio");  // Crea un botón con el texto "Inicio"
 		ButtonInicio.setForeground(new Color(128, 128, 128));
 		ButtonInicio.setFont(new Font("Constantia", Font.PLAIN, 19));  // Establece la fuente del botón
 		ButtonInicio.setBackground(new Color(240, 240, 240));  // Establece el color de fondo del botón
-		ButtonInicio.setBounds(-52, -18, 178, 126);  // Establece la posición y tamaño del botón en el panel lateral
+		ButtonInicio.setBounds(-53, 32, 178, 34);  // Establece la posición y tamaño del botón en el panel lateral
 		ButtonInicio.setBorder(null);  // Oculta el borde del botón
 		ButtonInicio.setOpaque(false);  // Establece el fondo del botón como transparente
 		panelLateral.add(ButtonInicio);  // Agrega el botón al panel lateral
 
-		//TEXTO CLEINTES
-
+		//TEXTO CLIENTES
+		
 		txtClientes = new JTextField();  // Crea un campo de texto
 		txtClientes.setForeground(new Color(192, 192, 192));  // Establece el color del texto
 		txtClientes.setFont(new Font("Constantia", Font.PLAIN, 18));  // Establece la fuente del texto
@@ -102,6 +135,7 @@ public class Inicio {
 		panelLateral.add(btnListadoDeClientes);  // Agrega el botón al panel lateral
 
 		// TEXTO VEHICULOS
+		
 		// Creación de un campo de texto JTextField con el nombre "txtVehiculos"
 		txtVehiculos = new JTextField();
 		// Se establece el texto "Vehiculos" dentro del campo de texto
@@ -175,8 +209,106 @@ public class Inicio {
 		btnConfiguracin.setBounds(0, 375, 111, 28);
 		// Se agrega el botón al panel lateral
 		panelLateral.add(btnConfiguracin);
+		
+		//********************************CONTENIDO PRINCIPAL******************************************
+		//*********************************************************************************************
+				
+		//RECUADRO NUMERO DE CLIENTES
+		
+		// Crea un JPanel para el recuadro de fondo
+		JPanel panelRecuadro = new JPanel();
+		panelRecuadro.setBackground(new Color(33, 37, 41)); // Establece un color de fondo bonito
+		panelRecuadro.setPreferredSize(new Dimension(300, 100)); // Establece las dimensiones preferidas del panel
+		panelRecuadro.setLayout(new BorderLayout());
+		// Agrega el panelRecuadro al contenido principal
+		contenido.add(panelRecuadro);
+		panelRecuadro.setBounds(445, 10, 347, 35); // Establece la posición y tamaño del panelRecuadro dentro de contenido
+		// Crea un JLabel para el número de clientes
+		JLabel labelClientes = new JLabel("Número de clientes:");
+		panelRecuadro.add(labelClientes, BorderLayout.CENTER);
+		labelClientes.setForeground(Color.WHITE); // Establece el color de texto a blanco
+		labelClientes.setFont(new Font("Tahoma", Font.BOLD, 14)); // Establece la fuente y tamaño de texto
+		labelClientes.setHorizontalAlignment(SwingConstants.CENTER);
+		// Agrega el contenido principal al frame
+		frame.getContentPane().add(contenido, BorderLayout.CENTER);
 
+		// CONTADOR DE NUMERO DE LOS CLIENTES
+
+		// SE CREA UN NUEVO PANEL PARA EL CONTADOR DE CLIENTES
+		JPanel panelContadorClientes = new JPanel();
+		panelContadorClientes.setBackground(new Color(33, 37, 41)); // Establece un color de fondo bonito
+		panelContadorClientes.setPreferredSize(new Dimension(300, 100)); // Establece las dimensiones preferidas del panel
+		panelContadorClientes.setLayout(new BorderLayout());
+		// Agrega el panelContadorClientes al contenido principal
+		contenido.add(panelContadorClientes);
+		panelContadorClientes.setBounds(706, 55, 68, 56); // Establece la posición y tamaño del panelContadorClientes dentro de contenido
+		// Crea un JLabel para el CONTADOR DE LOS CLIENTES
+		JLabel contadorClientes = new JLabel("0");
+		panelContadorClientes.add(contadorClientes, BorderLayout.CENTER);
+		contadorClientes.setForeground(Color.WHITE); // Establece el color de texto a blanco
+		contadorClientes.setFont(new Font("Arial", Font.BOLD, 50)); // Establece la fuente y tamaño de texto
+		contadorClientes.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		// ULTIMAS FACTURAS
+		
+		// UN RECUADRO NUEVO
+		panelRecuadro_1 = new JPanel() ;
+		panelRecuadro_1.setBackground(new Color(33, 37, 41)); // Establece un color de fondo bonito
+		panelRecuadro_1.setPreferredSize(new Dimension(300, 100)); // Establece las dimensiones preferidas del panel
+		panelRecuadro_1.setLayout(new BorderLayout());
+		// Agrega el panelRecuadro al contenido principal
+		contenido.add(panelRecuadro_1);
+		panelRecuadro_1.setBounds(10, 10, 425, 36); // Establece la posición y tamaño del panelRecuadro dentro de contenido
+		// Crea un JLabel para las últimas facturas
+		JLabel ultimasFacturas = new JLabel("<html>Últimas Facturas</html>");
+		panelRecuadro_1.add(ultimasFacturas, BorderLayout.CENTER);
+		ultimasFacturas.setForeground(Color.WHITE); // Establece el color de texto a blanco
+		ultimasFacturas.setFont(new Font("Tahoma", Font.BOLD, 14)); // Establece la fuente y tamaño de texto
+		ultimasFacturas.setHorizontalAlignment(SwingConstants.CENTER);
+		// Agrega el contenido principal al frame
+		frame.getContentPane().add(contenido, BorderLayout.CENTER);
+
+		// NUMERO DE ULTIMAS FACTURAS 
+		
+		// SE CREA UN NUEVO PANEL PARA LA LISTA DE CLIENTES GENERICOS
+		JPanel panelListaClientes = new JPanel();
+		panelListaClientes.setBackground(new Color(255, 255, 255)); // Establece un color de fondo blanco
+		panelListaClientes.setPreferredSize(new Dimension(500, 300)); // Establece las dimensiones preferidas del panel
+		panelListaClientes.setLayout(new BorderLayout());
+		// Agrega el panelListaClientes al contenido principal
+		contenido.add(panelListaClientes);
+		panelListaClientes.setBounds(10, 56, 425, 347); // Establece la posición y tamaño del panelListaClientes dentro de contenido
+		// Crear un array de objetos cliente genérico
+				Object[][] clientes = {
+				{"G001", "01/01/2022", "Nada"},
+				{"G002", "01/01/2022", "Nada"},
+				{"G003", "01/01/2022", "Nada"},
+				{"G004", "01/01/2022", "Nada"},
+				{"G005", "01/01/2022", "Nada"},
+				{"G006", "01/01/2022", "Nada"},
+				{"G007", "01/01/2022", "Nada"},
+				{"G008", "01/01/2022", "Nada"},
+				{"G009", "01/01/2022", "Nada"},
+				{"G010", "01/01/2022", "Nada"},
+				{"G011", "01/01/2022", "Nada"},
+				{"G012", "01/01/2022", "Nada"},
+				{"G013", "01/01/2022", "Nada"},
+				{"G014", "01/01/2022", "Nada"},
+				{"G015", "01/01/2022", "Nada"},
+				{"G016", "01/01/2022", "Nada"},
+				{"G017", "01/01/2022", "Nada"}
+				};
+
+		// Crear un array de etiquetas de encabezado para la tabla
+		String[] encabezado = {"ID", "FECHA", "PDF"};
+		// Crear un objeto JTable para mostrar la lista de clientes
+		JTable tablaClientes = new JTable(clientes, encabezado);
+		tablaClientes.setFont(new Font("Arial", Font.PLAIN, 14)); // Establece la fuente y tamaño de texto de la tabla
+		tablaClientes.setFillsViewportHeight(true); // Hace que la tabla ocupe todo el espacio disponible en el panel
+		tablaClientes.getTableHeader().setBackground(new Color(255, 255, 255)); // Establece un color de fondo blanco para la cabecera de la tabla
+				
+		// Crear un objeto JScrollPane para agregar la tablaClientes
+		JScrollPane scrollClientes = new JScrollPane(tablaClientes);
+		panelListaClientes.add(scrollClientes, BorderLayout.CENTER);
 	}
 }
-
-
